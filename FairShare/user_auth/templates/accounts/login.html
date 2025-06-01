@@ -1,0 +1,36 @@
+{% load static %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FairShare - Login to Split the Fun!</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h1>Welcome to FairShare!</h1>
+            <p class="tagline">Because splitting bills shouldn’t split friendships!</p>
+        <form method="post" action="{% url 'login' %}"> 
+            {% csrf_token %} 
+            <input type="hidden" name="next" value="{{ next }}"> 
+            <div class="input-group"> 
+                <label for="username">User ID</label>  
+                <input type="text" name="username" id="username" required placeholder="Enter your ID"> 
+            </div>
+            <div class="input-group"> 
+                <label for="password">Password</label>  
+                <input type="password" name="password" id="password" required placeholder="Enter your Password">  
+            </div>
+            <button type="submit" class="login-btn">Login</button>  
+        </form>
+            {% if error %}  
+                <p class="error">{{ error }}</p>  
+            {% endif %}
+            <p class="funny-note">Forgot your password?<a href="{% url 'reset_password' %}">Click here</a></p>
+            <p class="funny-note">Don't have an account? <a href="{% url 'register' %}">Register here</a></p>  
+        </div>
+    </div>
+</body>
+</html>
